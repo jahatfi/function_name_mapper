@@ -81,73 +81,80 @@ class Configuration:
     depth:int
     remaining_nodes:Set[str]
     mapping:Dict[str, str]
+    return_code:int
     epsilon:int=2
     rename_functions:bool=True
 
-def show_isomorphisms_heuristic(whole_graph:nx.DiGraph,
-                                subgraph:nx.DiGraph,
-                                successor_node_name:str,
-                                this_subgraph_node_name:str,
-                                depth:int,
-                                remaining_nodes:Set[str],
-                                mapping:Dict[str, str],
-                                epsilon:int=2,
-                                rename_functions:bool=True
-                                ):
+
+def show_isomorphisms_heuristic(state: Configuration):
     """
     Fuzzy match
     """
     print("-"*80)
-    if not remaining_nodes:
+    if not state.remaining_nodes:
         print("Found valid assignment:")
-        pprint.pprint(mapping)
+        pprint.pprint(state.mapping)
         return True
 
-    print(f"{depth=} {epsilon=} {this_subgraph_node_name=} {successor_node_name=} remaining_nodes=")
-    pprint.pprint(remaining_nodes)
+    print(f"{state.depth=} {state.epsilon=} {state.this_subgraph_node_name=} {state.successor_node_name=} remaining_nodes=")
+    pprint.pprint(state.remaining_nodes)
 
-    this_subgraph_node = subgraph.nodes[this_subgraph_node_name]
-    this_subgraph_node_out_degree = subgraph.out_degree[this_subgraph_node_name]
-    this_subgraph_node_in_degree = subgraph.in_degree[this_subgraph_node_name]
+    this_subgraph_node = state.subgraph.nodes[state.this_subgraph_node_name]
+    this_subgraph_node_out_degree = state.subgraph.out_degree[state.this_subgraph_node_name]
+    this_subgraph_node_in_degree = state.subgraph.in_degree[state.this_subgraph_node_name]
     candidate_graph_nodes = []
-    print(f"{this_subgraph_node_out_degree=} {this_subgraph_node_in_degree=}")
-    if successor_node_name:
-        print("successor list: "+str(list(whole_graph.successors(successor_node_name))))
-    for n, v in sorted(whole_graph.out_degree):
+    print(f"{this_subgraph_node_out_degree=} {this_subgraph_node_in_degree=} {candidate_graph_nodes=}")
+    if state.successor_node_name:
+        print("successor list: "+str(list(state.whole_graph.successors(state.successor_node_name))))
+    for n, v in sorted(state.whole_graph.out_degree):
         if not re.match("^(__|FUN)", n):
             continue
-        if successor_node_name:
-            if not n in whole_graph.successors(successor_node_name):
-                #print("continue 116")
+        if state.successor_node_name:
+            if not n in state.whole_graph.successors(state.successor_node_name):
+                
                 continue
             #if depth == 2:
-            print(f"{n:<30} # out_edges: {v} # of in edges: {whole_graph.in_degree[n]}")
+            print(f"{n:<30} # out_edges: {v} # of in edges: {state.whole_graph.in_degree[n]}")
         #print(f"{n=} {whole_graph.in_degree[n]=}")
-        if abs(whole_graph.in_degree[n] - this_subgraph_node_in_degree) <= 1 and abs(v - this_subgraph_node_out_degree) <= epsilon:
+        if abs(state.whole_graph.in_degree[n] - this_subgraph_node_in_degree) <= 1 and abs(v - this_subgraph_node_out_degree) <= state.epsilon:
+            print(f"Appending {n}")
             candidate_graph_nodes.append(n)
     print(pprint.pformat(f"{candidate_graph_nodes=}"))
 
+    if not candidate_graph_nodes:
+        print(f"No clear candidates for {state.this_subgraph_node_name}; removing it from list and returning...")
+        state.remaining_nodes.remove(state.this_subgraph_node_name)
+        state.return_code = -1
+        print("-"*80)
+        return state
+
     # D/B FS Recursive Search
     for candidate_graph_node in candidate_graph_nodes:
+        print(f"{candidate_graph_node=}")
 
-        remaining_neighbors = set(subgraph.neighbors(this_subgraph_node_name)) - set([n for n in whole_graph.nodes])
+        remaining_neighbors = set(state.subgraph.neighbors(state.this_subgraph_node_name)) - set(list(state.whole_graph.nodes))
 
         if not remaining_neighbors:
-            print(f"Subgraph node {this_subgraph_node_name} has no neighbors and cannot make a reasonable guess, removing it from list and returning from {depth=}...")
-            remaining_nodes.remove(this_subgraph_node_name)
+            print(f"Subgraph node {state.this_subgraph_node_name} has no neighbors and cannot make a reasonable guess, removing it from list and returning from {state.depth=}...")
+            state.remaining_nodes.remove(state.this_subgraph_node_name)
             return
 
+        print(f"{remaining_neighbors=}")
 
-        new_whole_graph = deepcopy(whole_graph)
-        new_whole_graph = nx.relabel_nodes(new_whole_graph, {candidate_graph_node:this_subgraph_node_name})
-        new_successor = this_subgraph_node_name
-        print(f"Assigning label \"{this_subgraph_node_name}\" to {candidate_graph_node}")
-        mapping_copy = deepcopy(mapping)
-        mapping[candidate_graph_node] = this_subgraph_node_name
-        remaining_nodes_copy = deepcopy(remaining_nodes)
-        remaining_nodes_copy.remove(this_subgraph_node_name)
-        print(f"Labels remaining: {remaining_nodes_copy}")
-        print(f"{subgraph[this_subgraph_node_name]=}")
+        new_state = deepcopy(state)
+        new_state.whole_graph = nx.relabel_nodes(new_state.whole_graph, {candidate_graph_node:state.this_subgraph_node_name})
+        new_state.successor_node_name = state.this_subgraph_node_name
+        print(f"Assigning label \"{state.this_subgraph_node_name}\" to {candidate_graph_node}")
+        state.mapping[candidate_graph_node] = state.this_subgraph_node_name
+
+        print(state.remaining_nodes)
+        try:
+            new_state.remaining_nodes.remove(state.this_subgraph_node_name)
+        except KeyError:
+            pass
+        print(f"Labels remaining: {state.remaining_nodes}")
+        print(f"{state.subgraph[state.this_subgraph_node_name]=}")
+        new_state.depth += 1
         #connected_nodes = list(subgraph.neighbors(this_subgraph_node_name))
         #this_subgraph_node_name = max(subgraph[this_subgraph_node_name].edges, key=lambda x: x[1])[0]
 
@@ -155,20 +162,9 @@ def show_isomorphisms_heuristic(whole_graph:nx.DiGraph,
 
         print(f"{remaining_neighbors=}")
 
-        this_subgraph_node_name = max(remaining_neighbors, key=lambda n: subgraph.out_degree[n])
-        print(f"{this_subgraph_node_name=}")
-        if show_isomorphisms_heuristic(
-            new_whole_graph,
-            subgraph,
-            new_successor,
-            this_subgraph_node_name,
-            depth+1,
-            remaining_nodes_copy,
-            mapping_copy,
-            epsilon,
-            rename_functions
-        ):
-            continue
+        new_state.this_subgraph_node_name = max(remaining_neighbors, key=lambda n: new_state.subgraph.out_degree[n])
+        print(f"{new_state.this_subgraph_node_name=}")
+        show_isomorphisms_heuristic(new_state)
 
     return False
 
@@ -281,8 +277,9 @@ def main():
                                     "",
                                     this_subgraph_node_name, 
                                     0, 
-                                    set([subgraph.nodes]) - set([n for n in whole_graph.nodes]),
+                                    set(list(subgraph.nodes)) - set(list(whole_graph.nodes)),
                                     {},
+                                    0,
                                     2, 
                                     True)
 
