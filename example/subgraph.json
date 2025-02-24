@@ -1,0 +1,48 @@
+[
+
+
+    {
+        "main": [
+            "free",
+            "fscanf",
+            "printf",
+            "return_tainted_buff",
+            "sink_4",
+            "source_1",
+            "source_3",
+            "strcpy",
+            "system"
+        ]
+    },
+    
+    {
+        "return_tainted_buff": [
+            "gets",
+            "malloc",
+            "printf"
+        ]
+    },
+    
+    {
+        "sink_4": [
+            "memcpy"
+        ]
+    },
+    
+    {
+        "source_1": [
+            "gets",
+            "layer_1_a",
+            "layer_1_b",
+            "layer_1_c",
+            "printf",
+            "rand"
+        ]
+    },
+    {
+        "source_3": [
+            "gets",
+            "printf"
+        ]
+    }
+]
