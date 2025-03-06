@@ -1,0 +1,119 @@
+[
+
+    {
+        "layer_1_a": [
+            "printf",
+            "rand"
+        ]
+    },
+    {
+        "layer_1_b": [
+            "layer_2_b",
+            "printf"
+        ]
+    },
+    {
+        "layer_1_c": [
+            "layer_2_b",
+            "layer_2_c",
+            "printf"
+        ]
+    },
+    {
+        "layer_2_a": [
+            "printf"
+        ]
+    },
+    {
+        "layer_2_b": [
+            "layer_3_a",
+            "printf",
+            "rand",
+            "system"
+        ]
+    },
+
+    {
+        "layer_3_a": [
+            "printf",
+            "sink_1"
+        ]
+    },
+
+
+    {
+        "main": [
+            "free",
+            "fscanf",
+            "printf",
+            "return_tainted_buff",
+            "sink_4",
+            "source_1",
+            "source_3",
+            "strcpy",
+            "system"
+        ]
+    },
+    {
+        "readme": [
+            "system"
+        ]
+    },
+    {
+        "return_tainted_buff": [
+            "gets",
+            "malloc",
+            "printf"
+        ]
+    },
+    {
+        "sink_1": [
+            "system"
+        ]
+    },
+    {
+        "sink_4": [
+            "memcpy"
+        ]
+    },
+    {
+        "socket": []
+    },
+    {
+        "source_1": [
+            "PI",
+            "gets",
+            "layer_1_a",
+            "layer_1_b",
+            "layer_1_c",
+            "printf",
+            "rand"
+        ]
+    },
+    {
+        "source_2": [
+            "layer_1_b",
+            "printf",
+            "read",
+            "socket"
+        ]
+    },
+    {
+        "source_3": [
+            "gets",
+            "printf"
+        ]
+    },
+    {
+        "sprintf": []
+    },
+    {
+        "srand": []
+    },
+    {
+        "strcpy": []
+    },
+    {
+        "system": []
+    }
+]

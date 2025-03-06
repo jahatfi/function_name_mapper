@@ -1,0 +1,309 @@
+[
+    {
+        "_DT_INIT": [
+            "__gmon_start__"
+        ]
+    },
+    {
+        "FUN_00101020": []
+    },
+    {
+        "free": [
+            "free"
+        ]
+    },
+    {
+        "putchar": [
+            "putchar"
+        ]
+    },
+    {
+        "strcpy": [
+            "strcpy"
+        ]
+    },
+    {
+        "__isoc99_fscanf": [
+            "__isoc99_fscanf"
+        ]
+    },
+    {
+        "puts": [
+            "puts"
+        ]
+    },
+    {
+        "system": [
+            "system"
+        ]
+    },
+    {
+        "printf": [
+            "printf"
+        ]
+    },
+    {
+        "read": [
+            "read"
+        ]
+    },
+    {
+        "srand": [
+            "srand"
+        ]
+    },
+    {
+        "memcpy": [
+            "memcpy"
+        ]
+    },
+    {
+        "gets": [
+            "gets"
+        ]
+    },
+    {
+        "malloc": [
+            "malloc"
+        ]
+    },
+    {
+        "sprintf": [
+            "sprintf"
+        ]
+    },
+    {
+        "rand": [
+            "rand"
+        ]
+    },
+    {
+        "socket": [
+            "socket"
+        ]
+    },
+    {
+        "__cxa_finalize": [
+            "__cxa_finalize"
+        ]
+    },
+    {
+        "entry": [
+            "__libc_start_main",
+            "FUN_0010195c"
+        ]
+    },
+    {
+        "FUN_00101160": [
+            "_ITM_deregisterTMCloneTable"
+        ]
+    },
+    {
+        "FUN_00101190": [
+            "_ITM_registerTMCloneTable"
+        ]
+    },
+    {
+        "_FINI_0": [
+            "__cxa_finalize",
+            "FUN_00101160"
+        ]
+    },
+    {
+        "_INIT_0": [
+            "FUN_00101190"
+        ]
+    },
+    {
+        "FUN_00101219": [
+            "malloc",
+            "gets",
+            "puts"
+        ]
+    },
+    {
+        "FUN_00101270": [
+            "system"
+        ]
+    },
+    {
+        "FUN_00101291": [
+            "rand",
+            "gets",
+            "puts",
+            "FUN_00101482",
+            "FUN_00101555",
+            "FUN_00101604"
+        ]
+    },
+    {
+        "FUN_00101376": [
+            "socket",
+            "read",
+            "puts",
+            "FUN_00101555"
+        ]
+    },
+    {
+        "FUN_0010144e": [
+            "gets",
+            "puts"
+        ]
+    },
+    {
+        "FUN_00101482": [
+            "rand",
+            "puts",
+            "printf"
+        ]
+    },
+    {
+        "FUN_00101555": [
+            "FUN_001016c9",
+            "puts",
+            "printf"
+        ]
+    },
+    {
+        "FUN_00101604": [
+            "FUN_001016c9",
+            "FUN_00101760",
+            "puts"
+        ]
+    },
+    {
+        "FUN_0010167c": [
+            "printf"
+        ]
+    },
+    {
+        "FUN_001016c9": [
+            "rand",
+            "system",
+            "puts",
+            "FUN_0010178c"
+        ]
+    },
+    {
+        "FUN_00101760": [
+            "FUN_0010181d"
+        ]
+    },
+    {
+        "FUN_0010178c": [
+            "puts",
+            "putchar",
+            "FUN_001018c5",
+            "printf"
+        ]
+    },
+    {
+        "FUN_0010181d": [
+            "FUN_001018e0",
+            "rand",
+            "puts",
+            "srand",
+            "FUN_001018c5",
+            "printf"
+        ]
+    },
+    {
+        "FUN_001018c5": [
+            "system"
+        ]
+    },
+    {
+        "FUN_001018e0": [
+            "sprintf"
+        ]
+    },
+    {
+        "FUN_0010190e": [
+            "gets",
+            "system"
+        ]
+    },
+    {
+        "FUN_00101931": [
+            "memcpy"
+        ]
+    },
+    {
+        "FUN_0010195c": [
+            "FUN_00101931",
+            "free",
+            "FUN_00101219",
+            "__isoc99_fscanf",
+            "strcpy",
+            "FUN_00101376",
+            "system",
+            "puts",
+            "FUN_00101291",
+            "FUN_0010144e",
+            "printf"
+        ]
+    },
+    {
+        "_DT_FINI": []
+    },
+    {
+        "free": []
+    },
+    {
+        "putchar": []
+    },
+    {
+        "__libc_start_main": []
+    },
+    {
+        "_ITM_deregisterTMCloneTable": []
+    },
+    {
+        "strcpy": []
+    },
+    {
+        "__isoc99_fscanf": []
+    },
+    {
+        "puts": []
+    },
+    {
+        "system": []
+    },
+    {
+        "printf": []
+    },
+    {
+        "read": []
+    },
+    {
+        "srand": []
+    },
+    {
+        "__gmon_start__": []
+    },
+    {
+        "memcpy": []
+    },
+    {
+        "gets": []
+    },
+    {
+        "malloc": []
+    },
+    {
+        "sprintf": []
+    },
+    {
+        "_ITM_registerTMCloneTable": []
+    },
+    {
+        "rand": []
+    },
+    {
+        "socket": []
+    },
+    {
+        "__cxa_finalize": []
+    }
+]

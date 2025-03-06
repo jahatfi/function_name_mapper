@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+    "/home/kali/Downloads/ghidra_11.2.1_PUBLIC/**/*.jar",
+    "/home/username/lib/foo.jar"
+]
+}
